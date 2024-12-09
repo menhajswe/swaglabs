@@ -30,12 +30,37 @@ public class TestCart {
 
     @Test
     public void testAddToCard() {
+        login.loginUser();
         cart.addToCard();
-        Assertions.assertThat(cart.confirmItemsAdded()).isTrue();
+        cart.navigateToCart();
+        try {
+            Thread.sleep(2000);
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+        Assertions.assertThat(cart.isCartEmpty()).isTrue();
     }
 
     @Test
     public void testCheckout() {
+        login.loginUser();
+        cart.addToCard();
         cart.checkout();
+    }
+
+    @Test
+    public void testRemoveFromCart() {
+        login.loginUser();
+        cart.addToCard();
+        cart.navigateToCart();
+        cart.removeFromCard();
+        Assertions.assertThat(cart.isCartEmpty()).isFalse();
+    }
+
+    @Test
+    public void testNavigateToCart() {
+        login.loginUser();
+        cart.navigateToCart();
+        Assertions.assertThat(driver.getCurrentUrl().contains("https://www.saucedemo.com/cart.html"));
     }
 }

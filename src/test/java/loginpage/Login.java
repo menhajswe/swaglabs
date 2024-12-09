@@ -18,7 +18,7 @@ public class Login {
         By loginButton = By.xpath("//input[@id='login-button']");
         WebElement userElement = driver.findElement(userIdPath);
         WebElement passwordElement = driver.findElement(passwordPath);
-        WebElement loginElement = driver.findElement(loginButton);
+        WebElement loginBtnElement = driver.findElement(loginButton);
 
         //Login
         userElement.sendKeys(ConfigReader.getStandardUserName());
@@ -27,11 +27,13 @@ public class Login {
         userElement.sendKeys("standard_user");
         passwordElement.sendKeys("secret_sauce");
          */
-        loginElement.click();
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException ex) {
-            System.out.println(ex.getMessage());
-        }
+        loginBtnElement.click();
+    }
+
+    public void logout() {
+        // Navigate to the list
+        driver.findElement(By.xpath("//button[@id='react-burger-menu-btn']")).click();
+        driver.findElement(By.xpath("//a[@id='logout_sidebar_link']")).click();
+        System.out.println("Signed out");
     }
 }
