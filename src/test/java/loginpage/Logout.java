@@ -23,6 +23,5 @@ public class Logout {
 
         By buttonPath = By.xpath("//a[@id='logout_sidebar_link']");
         driver.findElement(buttonPath).click();
-
     }
 }
